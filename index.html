@@ -65,7 +65,7 @@
 	.sliZ_btnR:hover{background:#000;}
 </style>
 </head>
-<body>
+<body style="padding:50px 0 300px">
 
 <div class="sliX" id="sliX">
 	<div class="sliX_con">
@@ -114,10 +114,10 @@
 
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/n_plus_slider.js"></script>
+<script type="text/javascript" src="js/cjmFocus.js"></script>
 <script>
 
-	var sliX = new Focus({
+	var sliX = new cjmFocus({
 		conBox:$("#sliX .sliX_con_in"),
 		con:$("#sliX .sliX_con a"),
 		tab:$("#sliX .sliX_tab i"),
@@ -133,7 +133,7 @@
 	});
 
 
-	var sliY = new Focus({
+	var sliY = new cjmFocus({
 		conBox:$("#sliY .sliY_con_in"),
 		con:$("#sliY .sliY_con a"),
 		tab:$("#sliY .sliY_tab i"),
@@ -152,7 +152,7 @@
 	});
 
 
-	var sliZ = new Focus({
+	var sliZ = new cjmFocus({
 		conBox:$("#sliZ .sliZ_con_in"),
 		con:$("#sliZ .sliZ_con a"),
 		btnL:$("#sliZ .sliZ_btnL"),
@@ -163,7 +163,7 @@
 		numIndex:0,//一开始显示第几个
 		loop:true,//true：循环；false：不循环
 		loopType:"seamless",//seamless：无缝循环；simple：简单循环
-		auto:false,//true：自动切换下一个；false：不自动
+		auto:true,//true：自动切换下一个；false：不自动
 		numDelay:5000//自动切换间隔时间，无自动循环则不用加该参数
 	});
 

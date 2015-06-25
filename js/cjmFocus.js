@@ -1,4 +1,4 @@
-function Focus(o) {
+function cjmFocus(o) {
 	this.conBox = o.conBox;
 	this.con = o.con;
 	this.tab = o.tab || false;
@@ -32,7 +32,7 @@ function Focus(o) {
 	this.moving = false;
 	this.init();
 }
-Focus.prototype = {
+cjmFocus.prototype = {
 	init:function() {
 		var _self = this;
 		if(_self.type == "scroll") {
