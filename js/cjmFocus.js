@@ -14,6 +14,9 @@ function cjmFocus(o) {
 	this.auto = o.auto || false;
 	this.numDelay = o.numDelay || 5000;
 	this.numIndex = o.numIndex || 0;
+	this.FuncCallFront = o.FuncCallFront || false;
+	this.FuncCallBack = o.FuncCallBack || false;
+	if(this.FuncCallFront) {this.FuncCallFront.call(this);}
 
 	this.numLen = this.con.length;
 	if(this.numLen <= this.numShow) {return;}
@@ -31,6 +34,7 @@ function cjmFocus(o) {
 	this.numMax = this.numLen - 1;
 	this.moving = false;
 	this.init();
+	if(this.FuncCallBack) {this.FuncCallBack.call(this);}
 }
 cjmFocus.prototype = {
 	init:function() {
@@ -114,6 +118,7 @@ cjmFocus.prototype = {
 			var numLeft;
 			if(_self.loop) {
 				if(_self.loopType=="seamless") {
+					if(numNew < _self.numLen) {numNew += _self.numLen;}
 					numNew = numNew > _self.numMax ? _self.numMin : numNew;
 					numNew = numNew < _self.numMin ? _self.numMax : numNew;
 					if (numNew != _self.numNow) {
