@@ -14,7 +14,7 @@ function cjmSlider(o) {
 	this.btnR = o.btnR || false;
 	this.numShow = o.numShow || 1;
 	this.type = o.type || "show";
-	this.numScroll = o.numScroll || this.tab.eq(0).width();
+	this.numScroll = o.numScroll || this.con.eq(0).width();
 	this.loop = o.loop || false;
 	if(this.loop) {this.loopType = o.loopType || "seamless";}
 	this.auto = o.auto || false;
@@ -137,7 +137,11 @@ cjmSlider.prototype = {
 		if(_self.tab) {
 			_self.tab.each(function(i){
 				$(this).click(function(){
-					_self.movieScroll(i);
+					var newNum = i;
+					if(_self.loopType == "seamless") {
+						newNum = i + _self.numLen;
+					}
+					_self.movieScroll(newNum);
 				});
 			});
 		}
@@ -155,10 +159,10 @@ cjmSlider.prototype = {
 			var numLeft;
 			if(_self.loop) {
 				if(_self.loopType=="seamless") {
-					if(numNew < _self.numLen) {numNew += _self.numLen;}
+					if(numNew < _self.numMin) {numNew += _self.numLen;}
 					numNew = numNew > _self.numMax ? _self.numMin : numNew;
 					numNew = numNew < _self.numMin ? _self.numMax : numNew;
-					if (numNew != _self.numNow) {
+					if (numNew != _self.numNow && numNew != _self.numIndex) {
 						if(_self.FuncCallMoveFront) {_self.FuncCallMoveFront();}
 						numLeft = - _self.numScroll * numNew;
 						_self.moving = true;
