@@ -395,12 +395,16 @@
 					var $showLeftZoomBox = $("#show_left_zoomBox");
 					var $showLeftZoomPic = $("#show_left_zoom img");
 					$ShopLeftTopLi.eq($numNow).addClass("cur");
+					$thisCon.eq(0).addClass("cur");
 					$thisCon.eq($numLen).addClass("cur");
+					$thisCon.eq(2*$numLen).addClass("cur");
 					$thisCon.each(function(i) {
 						$thisCon.eq(i).on("mouseover",function() {
 							$numNow = i%$numLen;
 							$thisCon.parent().find(".cur").removeClass("cur");
-							$(this).addClass("cur");
+							$thisCon.eq($numNow).addClass("cur");
+							$thisCon.eq($numNow+$numLen).addClass("cur");
+							$thisCon.eq($numNow+2*$numLen).addClass("cur");
 							$ShopLeftTopLi.parent().find(".cur").removeClass("cur");
 							$ShopLeftTopLi.eq($numNow).addClass("cur");
 						});
