@@ -20,6 +20,7 @@ function cjmSlider(o) {
 	this.auto = o.auto || false;
 	this.numDelay = o.numDelay || 5000;
 	this.numIndex = o.numIndex || 0;
+	this.numLen = this.con.length;
 
 	this.FuncCallFront = o.FuncCallFront || false;
 	this.FuncCallBack = o.FuncCallBack || false;
@@ -27,7 +28,6 @@ function cjmSlider(o) {
 	this.FuncCallMoveBack = o.FuncCallMoveBack || false;
 	if(this.FuncCallFront) {this.FuncCallFront.call(this);}
 
-	this.numLen = this.con.length;
 	if(this.numLen <= this.numShow) {return;}
 	if(this.auto) {this.pause = false;}
 	if(this.numShow > 1) {
