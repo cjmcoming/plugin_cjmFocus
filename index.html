@@ -319,10 +319,6 @@
 			.shop_left_bot .boxC li{ height:54px; width:54px; padding:0 5px; float:left;}
 			.shop_left_bot .boxC img{ display:block; width:52px; height:52px; padding:1px; cursor:pointer;}
 			.shop_left_bot .boxC .cur img{ padding:0; border:1px solid #000;}
-
-			.show_left_zoom{position:absolute; z-index:999; left:358px; top:0; width:346px; height:346px; border:1px solid #000; overflow:hidden; display:none;}
-			.show_left_zoom img{position:absolute; top:0; left:0; width:696px; height:696px;}
-			.show_left_zoomBox{width:172px; height:172px; border:1px solid #000; position:absolute; z-index:999; top:0; left:0; display:none;}
 		</style>
 
 		<div class="shop_left fl">
@@ -334,7 +330,6 @@
 	                <li><img src="imgpic/img_200_200_blue.png" width="348" height="348" /></li>
 	                <li><img src="imgpic/img_200_200_green.png" width="348" height="348" /></li>
 	            </ul>
-	            <div class="show_left_zoomBox" id="show_left_zoomBox"></div>
 	        </div>
             
             <div class="shop_left_bot" id="shop_left_bot">
@@ -350,8 +345,6 @@
                 </div>
             </div>
 
-            <div class="show_left_zoom" id="show_left_zoom"><img src="imgpic/img_200_200_red.png" /></div>
-
         </div>
 
         <script type="text/javascript">
@@ -366,36 +359,18 @@
 				loop:true,//true：循环；false：不循环
 				loopType:"seamless",//seamless：无缝循环；simple：简单循环
 				FuncCallFront:function() {
-					function getP(o,p) {
-						var oParent=o;
-						var left=o.offsetLeft;
-						var top=o.offsetTop;
-						while(oParent=oParent.offsetParent) {
-							left+=oParent.offsetLeft;
-							top+=oParent.offsetTop;
-						}
-						if(p == "x"){
-							return left;
-						}else if(p == "y") {
-							return top;
-						}else{
-							return {x:left,y:top};
-						}
-					}
 					var $ShopLeftTop = $("#shop_left_top");
 					var $ShopLeftTopLi = $("#shop_left_top li");
 					var $thisConBox = $("#shop_left_bot .boxC");
 					var $thisCon = $("#shop_left_bot .boxC li");
 					var $numNow = 0;
 					var $numLen = this.numLen;
-					var $showLeftZoom = $("#show_left_zoom");
-					var $showLeftZoomBox = $("#show_left_zoomBox");
-					var $showLeftZoomPic = $("#show_left_zoom img");
+
 					$ShopLeftTopLi.eq($numNow).addClass("cur");
 					$thisCon.eq(0).addClass("cur");
 					$thisCon.eq($numLen).addClass("cur");
 					$thisCon.eq(2*$numLen).addClass("cur");
-					$thisCon.parent().on("mouseover",$thisCon,function(e) {
+					$thisConBox.on("mouseover",$thisCon,function(e) {
 						if(e.target.tagName == "IMG") {
 							var i = $thisConBox.find("img").index($(e.target) );
 							$numNow = i%$numLen;
@@ -405,40 +380,6 @@
 							$thisConBox.find("li").eq($numNow+2*$numLen).addClass("cur");
 							$ShopLeftTopLi.parent().find(".cur").removeClass("cur");
 							$ShopLeftTopLi.eq($numNow).addClass("cur");
-						}
-					});
-					$ShopLeftTop.on("mouseover",function() {
-						$showLeftZoomPic.attr("src",$ShopLeftTopLi.eq($numNow).find("img").attr("src"));
-						$showLeftZoom.show();
-						$showLeftZoomBox.show();
-					});
-					$ShopLeftTop.on("mouseout",function() {
-						$showLeftZoom.hide();
-						$showLeftZoomBox.hide();
-					});
-					$ShopLeftTop.on("mousemove",function(event) {
-						var o = $("#shop_left_top")[0];
-						var mpX = (event.clientX - getP(o,"x") + Math.max(document.documentElement.scrollLeft,document.body.scrollLeft) );
-						var mpY = (event.clientY - getP(o,"y") + Math.max(document.documentElement.scrollTop,document.body.scrollTop) );
-						if(mpX < 87) {
-							$showLeftZoomBox.css("left",0);
-							$showLeftZoomPic.css("left",0);
-						}else if(mpX > 261) {
-							$showLeftZoomBox.css("left",174);
-							$showLeftZoomPic.css("left",-348);
-						}else{
-							$showLeftZoomBox.css("left",mpX-87);
-							$showLeftZoomPic.css("left",-mpX*2+174);
-						}
-						if(mpY < 87) {
-							$showLeftZoomBox.css("top",0);
-							$showLeftZoomPic.css("top",0);
-						}else if(mpY > 261) {
-							$showLeftZoomBox.css("top",174);
-							$showLeftZoomPic.css("top",-348);
-						}else{
-							$showLeftZoomBox.css("top",mpY-87);
-							$showLeftZoomPic.css("top",-mpY*2+174);
 						}
 					});
 				}
@@ -472,10 +413,6 @@
 			.shop_left_bot1 .boxC1 li{ height:54px; width:54px; padding:0 5px; float:left;}
 			.shop_left_bot1 .boxC1 img{ display:block; width:52px; height:52px; padding:1px; cursor:pointer;}
 			.shop_left_bot1 .boxC1 .cur img{ padding:0; border:1px solid #000;}
-
-			.show_left_zoom1{position:absolute; z-index:999; right:358px; top:0; width:346px; height:346px; border:1px solid #000; overflow:hidden; display:none;}
-			.show_left_zoom1 img{position:absolute; top:0; left:0; width:696px; height:696px;}
-			.show_left_zoomBox1{width:172px; height:172px; border:1px solid #000; position:absolute; z-index:999; top:0; left:0; display:none;}
 		</style>
 
 		<div class="shop_left1 fr">
@@ -489,7 +426,6 @@
 	                <li><img src="imgpic/img_200_200_red.png" width="348" height="348" /></li>
 	                <li><img src="imgpic/img_200_200_yellow.png" width="348" height="348" /></li>
 	            </ul>
-	            <div class="show_left_zoomBox1" id="show_left_zoomBox1"></div>
 	        </div>
             
             <div class="shop_left_bot1" id="shop_left_bot1">
@@ -507,8 +443,6 @@
                 </div>
             </div>
 
-            <div class="show_left_zoom1" id="show_left_zoom1"><img src="imgpic/img_200_200_red.png" /></div>
-
         </div>
 
         <script type="text/javascript">
@@ -517,6 +451,108 @@
 				con:$("#shop_left_bot1 .boxC1 li"),
 				btnL:$("#shop_left_bot1 .shop_left_bot_next1"),
 				btnR:$("#shop_left_bot1 .shop_left_bot_prev1"),
+				type:"scroll",//scroll：滚动；fade：渐变
+				numScroll:64,//每次滚动距离，不设置则默认为单个内容块的宽度
+				numShow:5,//每次露出多少内容块
+				loop:true,//true：循环；false：不循环
+				loopType:"seamless",//seamless：无缝循环；simple：简单循环
+				FuncCallFront:function() {
+					var $ShopLeftTop = $("#shop_left_top1");
+					var $ShopLeftTopLi = $("#shop_left_top1 li");
+					var $thisConBox = $("#shop_left_bot1 .boxC1");
+					var $thisCon = $("#shop_left_bot1 .boxC1 li");
+					var $numNow = 0;
+					var $numLen = this.numLen;
+
+					$ShopLeftTopLi.eq($numNow).addClass("cur");
+					$thisCon.eq(0).addClass("cur");
+					$thisCon.eq($numLen).addClass("cur");
+					$thisCon.eq(2*$numLen).addClass("cur");
+					$thisConBox.on("mouseover",$thisCon,function(e) {
+						if(e.target.tagName == "IMG") {
+							var i = $thisConBox.find("img").index($(e.target) );
+							$numNow = i%$numLen;
+							$thisConBox.find(".cur").removeClass("cur");
+							$thisConBox.find("li").eq($numNow).addClass("cur");
+							$thisConBox.find("li").eq($numNow+$numLen).addClass("cur");
+							$thisConBox.find("li").eq($numNow+2*$numLen).addClass("cur");
+							$ShopLeftTopLi.parent().find(".cur").removeClass("cur");
+							$ShopLeftTopLi.eq($numNow).addClass("cur");
+						}
+					});
+				}
+			});
+        </script>
+
+		<!--demo7结束-->
+
+
+	</div>
+</div>
+
+<div class="demo_horizon cf">
+	<div class="demo_vertical fl">
+
+
+		<!--demo8开始-->
+
+		<style type="text/css">
+			.shop_left2{ width:348px; position:relative;}
+			.shop_left_top2{ width:348px; height:348px; overflow:hidden;}
+			.shop_left_top2 li{ width:348px; height:348px; display:none;}
+			.shop_left_top2 li.cur{ display:block;}
+			.shop_left_top2 li img{ width:348px; height:348px;}
+
+			.shop_left_bot2{ position:relative; width:348px; height:54px; padding:10px 0;}
+			.shop_left_bot_next2,.shop_left_bot_prev2{ display:block; position:absolute; top:25px; width:12px; height:20px;}
+			.shop_left_bot_next2{ background:#c00; left:0px;}
+			.shop_left_bot_prev2{ background:#c00; right:0px;}
+			.shop_left_bot2 .boxC2 { width:320px; height:54px; margin:0 auto; position:relative; overflow:hidden;}
+			.shop_left_bot2 .boxC2 ul{ width:320px; height:54px; position:absolute; top:0; left:0; overflow:hidden;}
+			.shop_left_bot2 .boxC2 li{ height:54px; width:54px; padding:0 5px; float:left;}
+			.shop_left_bot2 .boxC2 img{ display:block; width:52px; height:52px; padding:1px; cursor:pointer;}
+			.shop_left_bot2 .boxC2 .cur img{ padding:0; border:1px solid #000;}
+
+			.show_left_zoom2{position:absolute; z-index:999; left:358px; top:0; width:346px; height:346px; border:1px solid #000; overflow:hidden; display:none;}
+			.show_left_zoom2 img{position:absolute; top:0; left:0; width:696px; height:696px;}
+			.show_left_zoomBox2{width:172px; height:172px; border:1px solid #000; position:absolute; z-index:999; top:0; left:0; display:none;}
+		</style>
+
+		<div class="shop_left2 fl">
+
+			<div class="shop_left_top2" id="shop_left_top2">
+	            <ul>
+	                <li><img src="imgpic/img_200_200_red.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_yellow.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_blue.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_green.png" width="348" height="348" /></li>
+	            </ul>
+	            <div class="show_left_zoomBox2" id="show_left_zoomBox2"></div>
+	        </div>
+            
+            <div class="shop_left_bot2" id="shop_left_bot2">
+                <a href="javascript:void(0)" class="shop_left_bot_next2"></a>
+                <a href="javascript:void(0)" class="shop_left_bot_prev2"></a>
+                <div class="boxC2">
+                	<ul class="switch">
+                        <li><img src="imgpic/img_200_200_red.png" /></li>
+                        <li><img src="imgpic/img_200_200_yellow.png" /></li>
+                        <li><img src="imgpic/img_200_200_blue.png" /></li>
+                        <li><img src="imgpic/img_200_200_green.png" /></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="show_left_zoom2" id="show_left_zoom2"><img src="imgpic/img_200_200_red.png" /></div>
+
+        </div>
+
+        <script type="text/javascript">
+        	var sliShopLeft2 = new cjmSlider({
+				conBox:$("#shop_left_bot2 .boxC2 ul"),
+				con:$("#shop_left_bot2 .boxC2 li"),
+				btnL:$("#shop_left_bot2 .shop_left_bot_next2"),
+				btnR:$("#shop_left_bot2 .shop_left_bot_prev2"),
 				type:"scroll",//scroll：滚动；fade：渐变
 				numScroll:64,//每次滚动距离，不设置则默认为单个内容块的宽度
 				numShow:5,//每次露出多少内容块
@@ -539,15 +575,15 @@
 							return {x:left,y:top};
 						}
 					}
-					var $ShopLeftTop = $("#shop_left_top1");
-					var $ShopLeftTopLi = $("#shop_left_top1 li");
-					var $thisConBox = $("#shop_left_bot1 .boxC1");
-					var $thisCon = $("#shop_left_bot1 .boxC1 li");
+					var $ShopLeftTop = $("#shop_left_top2");
+					var $ShopLeftTopLi = $("#shop_left_top2 li");
+					var $thisConBox = $("#shop_left_bot2 .boxC2");
+					var $thisCon = $("#shop_left_bot2 .boxC2 li");
 					var $numNow = 0;
 					var $numLen = this.numLen;
-					var $showLeftZoom = $("#show_left_zoom1");
-					var $showLeftZoomBox = $("#show_left_zoomBox1");
-					var $showLeftZoomPic = $("#show_left_zoom1 img");
+					var $showLeftZoom = $("#show_left_zoom2");
+					var $showLeftZoomBox = $("#show_left_zoomBox2");
+					var $showLeftZoomPic = $("#show_left_zoom2 img");
 					$ShopLeftTopLi.eq($numNow).addClass("cur");
 					$thisCon.eq(0).addClass("cur");
 					$thisCon.eq($numLen).addClass("cur");
@@ -574,7 +610,7 @@
 						$showLeftZoomBox.hide();
 					});
 					$ShopLeftTop.on("mousemove",function(event) {
-						var o = $("#shop_left_top1")[0];
+						var o = $("#shop_left_top2")[0];
 						var mpX = (event.clientX - getP(o,"x") + Math.max(document.documentElement.scrollLeft,document.body.scrollLeft) );
 						var mpY = (event.clientY - getP(o,"y") + Math.max(document.documentElement.scrollTop,document.body.scrollTop) );
 						if(mpX < 87) {
@@ -602,7 +638,164 @@
 			});
         </script>
 
-		<!--demo7结束-->
+		<!--demo8结束-->
+
+
+	</div>
+
+
+	<div class="demo_vertical fr">
+
+
+		<!--demo9开始-->
+
+		<style type="text/css">
+			.shop_left3{ width:348px; position:relative;}
+			.shop_left_top3{ width:348px; height:348px; overflow:hidden;}
+			.shop_left_top3 li{ width:348px; height:348px; display:none;}
+			.shop_left_top3 li.cur{ display:block;}
+			.shop_left_top3 li img{ width:348px; height:348px;}
+
+			.shop_left_bot3{ position:relative; width:348px; height:54px; padding:10px 0;}
+			.shop_left_bot_next3,.shop_left_bot_prev3{ display:block; position:absolute; top:25px; width:12px; height:20px;}
+			.shop_left_bot_next3{ background:#c00; left:0px;}
+			.shop_left_bot_prev3{ background:#c00; right:0px;}
+			.shop_left_bot3 .boxC3 { width:320px; height:54px; margin:0 auto; position:relative; overflow:hidden;}
+			.shop_left_bot3 .boxC3 ul{ width:320px; height:54px; position:absolute; top:0; left:0; overflow:hidden;}
+			.shop_left_bot3 .boxC3 li{ height:54px; width:54px; padding:0 5px; float:left;}
+			.shop_left_bot3 .boxC3 img{ display:block; width:52px; height:52px; padding:1px; cursor:pointer;}
+			.shop_left_bot3 .boxC3 .cur img{ padding:0; border:1px solid #000;}
+
+			.show_left_zoom3{position:absolute; z-index:999; right:358px; top:0; width:346px; height:346px; border:1px solid #000; overflow:hidden; display:none;}
+			.show_left_zoom3 img{position:absolute; top:0; left:0; width:696px; height:696px;}
+			.show_left_zoomBox3{width:172px; height:172px; border:1px solid #000; position:absolute; z-index:999; top:0; left:0; display:none;}
+		</style>
+
+		<div class="shop_left3 fr">
+
+			<div class="shop_left_top3" id="shop_left_top3">
+	            <ul>
+	                <li><img src="imgpic/img_200_200_red.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_yellow.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_blue.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_green.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_red.png" width="348" height="348" /></li>
+	                <li><img src="imgpic/img_200_200_yellow.png" width="348" height="348" /></li>
+	            </ul>
+	            <div class="show_left_zoomBox3" id="show_left_zoomBox3"></div>
+	        </div>
+            
+            <div class="shop_left_bot3" id="shop_left_bot3">
+                <a href="javascript:void(0)" class="shop_left_bot_next3"></a>
+                <a href="javascript:void(0)" class="shop_left_bot_prev3"></a>
+                <div class="boxC3">
+                	<ul class="switch3">
+                        <li><img src="imgpic/img_200_200_red.png" /></li>
+                        <li><img src="imgpic/img_200_200_yellow.png" /></li>
+                        <li><img src="imgpic/img_200_200_blue.png" /></li>
+                        <li><img src="imgpic/img_200_200_green.png" /></li>
+                        <li><img src="imgpic/img_200_200_red.png" /></li>
+                        <li><img src="imgpic/img_200_200_yellow.png" /></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="show_left_zoom3" id="show_left_zoom3"><img src="imgpic/img_200_200_red.png" /></div>
+
+        </div>
+
+        <script type="text/javascript">
+        	var sliShopLeft3 = new cjmSlider({
+				conBox:$("#shop_left_bot3 .boxC3 ul"),
+				con:$("#shop_left_bot3 .boxC3 li"),
+				btnL:$("#shop_left_bot3 .shop_left_bot_next3"),
+				btnR:$("#shop_left_bot3 .shop_left_bot_prev3"),
+				type:"scroll",//scroll：滚动；fade：渐变
+				numScroll:64,//每次滚动距离，不设置则默认为单个内容块的宽度
+				numShow:5,//每次露出多少内容块
+				loop:true,//true：循环；false：不循环
+				loopType:"seamless",//seamless：无缝循环；simple：简单循环
+				FuncCallFront:function() {
+					function getP(o,p) {
+						var oParent=o;
+						var left=o.offsetLeft;
+						var top=o.offsetTop;
+						while(oParent=oParent.offsetParent) {
+							left+=oParent.offsetLeft;
+							top+=oParent.offsetTop;
+						}
+						if(p == "x"){
+							return left;
+						}else if(p == "y") {
+							return top;
+						}else{
+							return {x:left,y:top};
+						}
+					}
+					var $ShopLeftTop = $("#shop_left_top3");
+					var $ShopLeftTopLi = $("#shop_left_top3 li");
+					var $thisConBox = $("#shop_left_bot3 .boxC3");
+					var $thisCon = $("#shop_left_bot3 .boxC3 li");
+					var $numNow = 0;
+					var $numLen = this.numLen;
+					var $showLeftZoom = $("#show_left_zoom3");
+					var $showLeftZoomBox = $("#show_left_zoomBox3");
+					var $showLeftZoomPic = $("#show_left_zoom3 img");
+					$ShopLeftTopLi.eq($numNow).addClass("cur");
+					$thisCon.eq(0).addClass("cur");
+					$thisCon.eq($numLen).addClass("cur");
+					$thisCon.eq(2*$numLen).addClass("cur");
+					$thisCon.parent().on("mouseover",$thisCon,function(e) {
+						if(e.target.tagName == "IMG") {
+							var i = $thisConBox.find("img").index($(e.target) );
+							$numNow = i%$numLen;
+							$thisConBox.find(".cur").removeClass("cur");
+							$thisConBox.find("li").eq($numNow).addClass("cur");
+							$thisConBox.find("li").eq($numNow+$numLen).addClass("cur");
+							$thisConBox.find("li").eq($numNow+2*$numLen).addClass("cur");
+							$ShopLeftTopLi.parent().find(".cur").removeClass("cur");
+							$ShopLeftTopLi.eq($numNow).addClass("cur");
+						}
+					});
+					$ShopLeftTop.on("mouseover",function() {
+						$showLeftZoomPic.attr("src",$ShopLeftTopLi.eq($numNow).find("img").attr("src"));
+						$showLeftZoom.show();
+						$showLeftZoomBox.show();
+					});
+					$ShopLeftTop.on("mouseout",function() {
+						$showLeftZoom.hide();
+						$showLeftZoomBox.hide();
+					});
+					$ShopLeftTop.on("mousemove",function(event) {
+						var o = $("#shop_left_top3")[0];
+						var mpX = (event.clientX - getP(o,"x") + Math.max(document.documentElement.scrollLeft,document.body.scrollLeft) );
+						var mpY = (event.clientY - getP(o,"y") + Math.max(document.documentElement.scrollTop,document.body.scrollTop) );
+						if(mpX < 87) {
+							$showLeftZoomBox.css("left",0);
+							$showLeftZoomPic.css("left",0);
+						}else if(mpX > 261) {
+							$showLeftZoomBox.css("left",174);
+							$showLeftZoomPic.css("left",-348);
+						}else{
+							$showLeftZoomBox.css("left",mpX-87);
+							$showLeftZoomPic.css("left",-mpX*2+174);
+						}
+						if(mpY < 87) {
+							$showLeftZoomBox.css("top",0);
+							$showLeftZoomPic.css("top",0);
+						}else if(mpY > 261) {
+							$showLeftZoomBox.css("top",174);
+							$showLeftZoomPic.css("top",-348);
+						}else{
+							$showLeftZoomBox.css("top",mpY-87);
+							$showLeftZoomPic.css("top",-mpY*2+174);
+						}
+					});
+				}
+			});
+        </script>
+
+		<!--demo9结束-->
 
 
 	</div>
